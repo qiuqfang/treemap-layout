@@ -3,11 +3,13 @@ export type TreeNode = {
     value: number;
     name: string;
     children: Tree[];
+    label?: string;
   };
   export type TreeLeaf = {
     type: 'leaf';
     name: string;
     value: number;
+    label?: string;
   };
 
   export type Tree = TreeNode | TreeLeaf;
