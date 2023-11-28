@@ -7,7 +7,7 @@ import React, {useCallback, useState} from 'react';
 import { treemapBinary, treemapDice, treemapSlice, treemapSliceDice, treemapSquarify, treemapResquarify } from "d3";
 import TreemapNAry from "@/algorithms/TreemapNAry"
 import {title1, title2} from "@/algorithms/TreemapTitle"
-import classNames from "classnames";
+import {cn} from "@/lib/utils";
 
 
 
@@ -66,7 +66,7 @@ export default function Home() {
                         <button
                             key={'ti'+index}
                             onClick={() => handleTileClick(tile.method)}
-                            className={classNames("rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-amber-300", {"bg-amber-300 hover:bg-amber-500": tile.type === 'custom'})}
+                            className={cn("rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-amber-300", {"bg-amber-300 hover:bg-amber-500": tile.type === 'custom'})}
                         >
                             {tile.name}
                         </button>
