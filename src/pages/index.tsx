@@ -6,7 +6,7 @@ import {testCases} from "@/data/testCases";
 import React, {useCallback, useState} from 'react';
 import { treemapBinary, treemapDice, treemapSlice, treemapSliceDice, treemapSquarify, treemapResquarify } from "d3";
 import TreemapNAry from "@/algorithms/TreemapNAry"
-import TreemapTitle from "@/algorithms/TreemapTitle"
+import {title1, title2} from "@/algorithms/TreemapTitle"
 import classNames from "classnames";
 
 
@@ -24,7 +24,8 @@ export default function Home() {
         { name: 'SliceDice', method: treemapSliceDice },
         { name: 'Squarify', method: treemapSquarify },
         { name: 'Resquarify', method: treemapResquarify },
-        { name: '标题优化', method: TreemapTitle, type: 'custom'},
+        { name: '标题优化-squa', method: title1, type: 'custom'},
+        { name: '标题优化-dice', method: title2, type: 'custom'},
 
         // { name: 'N-Ary', method: TreemapNAry },
     ];
@@ -36,7 +37,6 @@ export default function Home() {
 
     // Function to handle tile button click
     const handleTileClick = (tileMethod: TileMethod) => {
-        console.log('click', tileMethod)
         setSelectedTile(() => tileMethod);
     };
 
@@ -54,7 +54,7 @@ export default function Home() {
                         <button
                             key={'tc'+index}
                             onClick={() => handleTestCaseClick(testCase)}
-                            className="rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100"
+                            className="rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-amber-300"
                         >
                             {testCase.name}
                         </button>
@@ -66,7 +66,7 @@ export default function Home() {
                         <button
                             key={'ti'+index}
                             onClick={() => handleTileClick(tile.method)}
-                            className={classNames("rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100", {"bg-amber-300 hover:bg-amber-400": tile.type === 'custom'})}
+                            className={classNames("rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-amber-300", {"bg-amber-300 hover:bg-amber-500": tile.type === 'custom'})}
                         >
                             {tile.name}
                         </button>
