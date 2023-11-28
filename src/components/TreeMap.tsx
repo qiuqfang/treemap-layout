@@ -3,7 +3,6 @@ import { type Tree } from "@/data/data1";
 import * as d3 from "d3";
 import { cn } from "@/lib/utils";
 import { ImagePlaceholder } from "./ImagePlaceholder";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 export type TileMethod = typeof d3.treemapSquarify | typeof d3.treemapSliceDice;
 
@@ -53,83 +52,73 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
 
   console.log(root.leaves());
   const allShapes = root.leaves().map((leaf, i) => {
+
     const parentName = leaf.parent?.data.name;
     const width = leaf.x1 - leaf.x0;
     const height = leaf.y1 - leaf.y0;
-    const widthBfb = (width / leaf.x1) * 100;
-    const heightBfb = (height / leaf.x1) * 100;
 
     // 动态值仍需使用内联样式
     const dynamicStyles = {
-      // left: `${leaf.x0}px`,
-      // top: `${leaf.y0}px`,
+      left: `${leaf.x0}px`,
+      top: `${leaf.y0}px`,
       width: `${width}px`,
       height: `${height}px`,
-      flex: `${widthBfb} 1 0px`,
-      // width: `${width}px`,
-      // height: `${height}px`,
       backgroundColor: colorScale(parentName ?? ""),
     };
 
     if (leaf.data.name === "图片") {
       return (
-        <>
-          <Panel
-            key={leaf.id}
-            style={dynamicStyles}
-            className={cn(
-              "box-border rounded-lg p-4 opacity-80 transition-opacity duration-200 hover:opacity-100",
-              { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
-            )}
-          >
-            <ImagePlaceholder />
-          </Panel>
-          <PanelResizeHandle className="h-2" />
-        </>
+        <div
+          key={leaf.id}
+          style={dynamicStyles}
+          className={cn(
+            "absolute box-border flex items-center justify-center rounded-lg p-4 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
+        >
+          <ImagePlaceholder />
+        </div>
       );
     } else if (leaf.data.label && leaf.data.label === "title") {
       return (
-        <>
-          <Panel
-            key={leaf.id}
-            style={dynamicStyles}
-            className={cn(
-              "box-border rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
-              { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
-            )}
-          >
-            <div className={cn("font-mono text-6xl font-bold text-white")}>
-              {leaf.data.name}
-            </div>
-          </Panel>
-          <PanelResizeHandle className="h-2" />
-        </>
+        <div
+          key={leaf.id}
+          style={dynamicStyles}
+          className={cn(
+            "absolute box-border flex items-center justify-center rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
+        >
+          <div className={cn("font-mono text-6xl font-bold text-white")}>
+            {leaf.data.name}
+          </div>
+        </div>
       );
     } else {
       return (
-        <>
-          <Panel
-            key={leaf.id}
-            style={dynamicStyles}
-            className={cn(
-              "box-border rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
-              { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
-            )}
-          >
-            <div className={cn("text-2xl text-white")}>{leaf.data.name}</div>
-          </Panel>
-          <PanelResizeHandle className="h-2" />
-        </>
+        <div
+          key={leaf.id}
+          style={dynamicStyles}
+          className={cn(
+            "absolute box-border flex items-start justify-between rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
+        >
+          <div className={cn("text-2xl text-white")}>{leaf.data.name}</div>
+        </div>
       );
     }
   });
 
   return (
-    <PanelGroup
-      direction="vertical"
+    <div
+      className="relative"
       style={containerStyle} // 应用内联样式来设置宽度和高度
     >
       {allShapes}
-    </PanelGroup>
+    </div>
   );
 };
