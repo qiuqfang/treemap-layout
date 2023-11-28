@@ -82,7 +82,7 @@ export default function Home() {
             </button>
           ))}
         </div>
-        <div className="container flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-white px-4">
+        <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-white">
           <Treemap
             data={selectedTestCase}
             width={1600}
