@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { Tree } from "@/data/data1";
+import { type Tree } from "@/data/data1";
 import * as d3 from "d3";
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export type TileMethod = typeof d3.treemapSquarify | typeof d3.treemapSliceDice;
@@ -41,8 +41,12 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
     .range(colors);
 
   const root = useMemo(() => {
-      // TODO: padding can be set with theme
-    const treeGenerator = d3.treemap<Tree>().size([width, height]).padding(20).tile(tile);
+    // TODO: padding can be set with theme
+    const treeGenerator = d3
+      .treemap<Tree>()
+      .size([width, height])
+      .padding(20)
+      .tile(tile);
     return treeGenerator(hierarchy);
   }, [hierarchy, width, height]);
 
@@ -57,46 +61,55 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
       top: `${leaf.y0}px`,
       width: `${width}px`,
       height: `${height}px`,
-      backgroundColor: colorScale(parentName ?? ''),
+      backgroundColor: colorScale(parentName ?? ""),
     };
-
 
     if (leaf.data.name === "图片") {
       return (
         <div
           key={leaf.id}
           style={dynamicStyles}
-          className={cn("absolute opacity-80 hover:opacity-100 flex justify-center items-center box-border transition-opacity duration-200 rounded-lg p-4", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
+          className={cn(
+            "absolute box-border flex items-center justify-center rounded-lg p-4 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
         >
           <ImagePlaceholder />
         </div>
       );
-    }
-    else if (leaf.data.label && leaf.data.label === 'title') {
+    } else if (leaf.data.label && leaf.data.label === "title") {
       return (
         <div
           key={leaf.id}
           style={dynamicStyles}
-          className={cn("absolute opacity-80 hover:opacity-100 flex justify-center items-center p-1.5 box-border transition-opacity duration-200 rounded-lg", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
+          className={cn(
+            "absolute box-border flex items-center justify-center rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
         >
-        <div className={cn("text-white text-6xl font-bold font-mono")}>{leaf.data.name}</div>
+          <div className={cn("font-mono text-6xl font-bold text-white")}>
+            {leaf.data.name}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div
+          key={leaf.id}
+          style={dynamicStyles}
+          className={cn(
+            "absolute box-border flex items-start justify-between rounded-lg p-1.5 opacity-80 transition-opacity duration-200 hover:opacity-100",
+            { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 },
+            { "flex justify-center": leaf.data.name.length <= 2 },
+          )}
+        >
+          <div className={cn("text-2xl text-white")}>{leaf.data.name}</div>
         </div>
       );
     }
-    else {
-      return (
-      <div
-        key={leaf.id}
-        style={dynamicStyles}
-        className={cn("absolute opacity-80 hover:opacity-100 flex items-start justify-between p-1.5 box-border transition-opacity duration-200 rounded-lg", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
-      >
-        <div className={cn("text-white text-2xl")}>{leaf.data.name}</div>
-      </div>
-    );
-      }
   });
-
-
 
   return (
     <div
@@ -105,6 +118,5 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
     >
       {allShapes}
     </div>
-
   );
 };
