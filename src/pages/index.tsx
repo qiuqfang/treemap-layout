@@ -6,6 +6,9 @@ import {testCases} from "@/data/testCases";
 import React, {useCallback, useState} from 'react';
 import { treemapBinary, treemapDice, treemapSlice, treemapSliceDice, treemapSquarify, treemapResquarify } from "d3";
 import TreemapNAry from "@/algorithms/TreemapNAry"
+import TreemapTitle from "@/algorithms/TreemapTitle"
+import classNames from "classnames";
+
 
 
 export default function Home() {
@@ -21,6 +24,8 @@ export default function Home() {
         { name: 'SliceDice', method: treemapSliceDice },
         { name: 'Squarify', method: treemapSquarify },
         { name: 'Resquarify', method: treemapResquarify },
+        { name: '标题优化', method: TreemapTitle, type: 'custom'},
+
         // { name: 'N-Ary', method: TreemapNAry },
     ];
 
@@ -61,7 +66,7 @@ export default function Home() {
                         <button
                             key={'ti'+index}
                             onClick={() => handleTileClick(tile.method)}
-                            className="rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100"
+                            className={classNames("rounded bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100", {"bg-amber-300 hover:bg-amber-400": tile.type === 'custom'})}
                         >
                             {tile.name}
                         </button>

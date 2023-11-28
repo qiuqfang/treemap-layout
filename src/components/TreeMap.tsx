@@ -79,7 +79,7 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
           style={dynamicStyles}
           className={classNames("absolute opacity-80 hover:opacity-100 flex justify-center items-center p-1.5 box-border transition-opacity duration-200 rounded-lg", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
         >
-        <div className={classNames("text-white text-5xl font-bold")}>{leaf.data.name}</div>
+        <div className={classNames("text-white text-6xl font-bold font-mono")}>{leaf.data.name}</div>
         </div>
       );
     }
@@ -88,9 +88,9 @@ export const Treemap = ({ width, height, data, tile }: TreemapProps) => {
       <div
         key={leaf.id}
         style={dynamicStyles}
-        className={classNames("absolute opacity-80 hover:opacity-100 flex items-start justify-start p-1.5 box-border transition-opacity duration-200 rounded-lg", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
+        className={classNames("absolute opacity-80 hover:opacity-100 flex items-start justify-between p-1.5 box-border transition-opacity duration-200 rounded-lg", { "opacity-5 hover:opacity-5": leaf.data.name.length === 0 }, { "flex justify-center": leaf.data.name.length <= 2 },)}
       >
-        <div className={classNames("text-white text-2xl font-bold")}>{leaf.data.name}</div>
+        <div className={classNames("text-white text-2xl")}>{leaf.data.name}</div>
       </div>
     );
       }

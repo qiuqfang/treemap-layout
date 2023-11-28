@@ -165,18 +165,19 @@ export const testCases: NonEmptyArray<Tree> = [
             value: 0,
             children: [
                 // { type: "leaf", name: "Mélanie", value: 45 },
-                { type: "leaf", name: testTexts.title1, value: 40, label: "title" },
-            ],
-        },
-        {
-            type: "node",
-            name: "Team Sales",
-            value: 0,
-            children: [
-                // { type: "leaf", name: "Mélanie", value: 45 },
+                { type: "leaf", name: testTexts.title1, value: 35, label: "title" },
                 { type: "leaf", name: testTexts.body1, value: 80 },
             ],
         },
+        // {
+        //     type: "node",
+        //     name: "Team Sales",
+        //     value: 0,
+        //     children: [
+        //         // { type: "leaf", name: "Mélanie", value: 45 },
+        //         { type: "leaf", name: testTexts.body1, value: 80 },
+        //     ],
+        // },
     ],
 },
 {
@@ -268,8 +269,8 @@ export const testCases: NonEmptyArray<Tree> = [
                     children: [
                         { type: "node", name: "组1", value: 0,  children: [
                             { type: "leaf", name: "图片", value: 50 },
-                            { type: "leaf", name: "@reallygreatsite", value: 5 },
-                            { type: "leaf", name: testTexts.body2, value: 45 },
+                            { type: "leaf", name: "@reallygreatsite", value: 10 },
+                            { type: "leaf", name: testTexts.body2, value: 40 },
                         ]},
                     ],
                 },
@@ -280,8 +281,8 @@ export const testCases: NonEmptyArray<Tree> = [
                     children: [
                         { type: "node", name: "组2", value: 0,  children: [
                             { type: "leaf", name: "图片", value: 50 },
-                            { type: "leaf", name: "@reallygreatsite", value: 5 },
-                            { type: "leaf", name: testTexts.body2, value: 45 },
+                            { type: "leaf", name: "@reallygreatsite", value: 10 },
+                            { type: "leaf", name: testTexts.body2, value: 40 },
                         ]},
                     ],
                 },
